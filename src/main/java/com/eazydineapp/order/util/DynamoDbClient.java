@@ -10,6 +10,11 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
+/**
+ * DynamoDB utility class
+ * @author Anushri Srinath Aithal
+ *
+ */
 @Service
 public class DynamoDbClient {
 

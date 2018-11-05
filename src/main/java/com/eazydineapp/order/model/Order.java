@@ -9,6 +9,11 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 
+/**
+ * Order Entity
+ * @author Anushri Srinath Aithal
+ *
+ */
 @DynamoDBTable(tableName = "Order")
 public class Order {
 
@@ -34,7 +39,7 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	@DynamoDBIndexHashKey(attributeName = "restuarantId", globalSecondaryIndexName = "restuarantId-createdTime-index")
+	@DynamoDBAttribute(attributeName = "restuarantId")
 	public String getRestuarantId() {
 		return restuarantId;
 	}
@@ -43,7 +48,6 @@ public class Order {
 		this.restuarantId = restuarantId;
 	}
 	
-	@DynamoDBIndexHashKey(attributeName = "restaurantName", globalSecondaryIndexName = "restaurantName-createdTime-index")
 	public String getRestaurantName() {
 		return restaurantName;
 	}
@@ -71,7 +75,7 @@ public class Order {
 	}
 
 	@DynamoDBTypeConvertedEnum
-	@DynamoDBIndexHashKey(attributeName = "orderStatus", globalSecondaryIndexName = "orderStatus-createdTime-index")
+	@DynamoDBAttribute(attributeName = "orderStatus")
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
