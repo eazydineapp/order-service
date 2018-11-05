@@ -43,4 +43,11 @@ public interface OrderDao {
 	 */
 	List<Order> getOrdersByOrderStatus(String userId, String value, Boolean sortciteria);
 
+	/**
+	 * Fetch order by its id
+	 * @param orderId
+	 * @return
+	 */
+	Order getOrderByOrderId(String orderId);
+
 }

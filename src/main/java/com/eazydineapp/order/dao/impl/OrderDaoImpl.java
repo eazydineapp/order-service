@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.eazydineapp.order.dao.OrderDao;
 import com.eazydineapp.order.model.Order;
@@ -16,6 +17,7 @@ import com.eazydineapp.order.util.DynamoDbClient;
 
 /**
  * Repository implementation class
+ * 
  * @author Anushri Srinath Aithal
  *
  */
@@ -64,9 +66,9 @@ public class OrderDaoImpl implements OrderDao {
 		expressionAttributeValues.put(":restuarantIdValue", new AttributeValue().withS(value));
 
 		DynamoDBQueryExpression<Order> dynamoDBQueryExpression = new DynamoDBQueryExpression<Order>()
-				.withIndexName("userId-createdTime-index")	//GSI name
-				.withKeyConditionExpression("#userId = :userIdValue")	//hash key condition
-				.withFilterExpression("#restuarantId = :restuarantIdValue")	//filter condition
+				.withIndexName("userId-createdTime-index") // GSI name
+				.withKeyConditionExpression("#userId = :userIdValue") // hash key condition
+				.withFilterExpression("#restuarantId = :restuarantIdValue") // filter condition
 				.withExpressionAttributeNames(expressionAttributesNames)
 				.withExpressionAttributeValues(expressionAttributeValues).withScanIndexForward(sortciteria)
 				.withConsistentRead(false);
@@ -96,6 +98,20 @@ public class OrderDaoImpl implements OrderDao {
 
 		List<Order> orders = mapper.query(Order.class, dynamoDBQueryExpression);
 		return orders;
+	}
+
+	@Override
+	public Order getOrderByOrderId(String orderId) {
+		DynamoDBMapper mapper = dynamodbClient.getDynamoDBMapper();
+
+		Map<String, AttributeValue> values = new HashMap<String, AttributeValue>();
+		values.put(":orderId", new AttributeValue().withS(orderId));
+
+		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression().withFilterExpression("orderId = :orderId")
+				.withExpressionAttributeValues(values);
+
+		List<Order> orders = mapper.scan(Order.class, scanExpression);
+		return orders.get(0);
 	}
 
 }

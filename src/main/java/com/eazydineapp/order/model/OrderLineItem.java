@@ -5,18 +5,20 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 
 /**
  * Order Line Item Entity
+ * 
  * @author Anushri Srinath Aithal
  *
  */
 @DynamoDBDocument
 public class OrderLineItem {
 
-	String lineItemId;
-	String itemId;
-	String itemName;
-	OrderStatus lineItemStatus;
-	String createdTime;
-	String modifiedTime;
+	private String lineItemId;
+	private String itemId;
+	private String itemName;
+	private OrderStatus lineItemStatus;
+	private String createdTime;
+	private String modifiedTime;
+	private Integer quantity;
 
 	public String getLineItemId() {
 		return lineItemId;
@@ -65,6 +67,14 @@ public class OrderLineItem {
 
 	public void setModifiedTime(String modifiedTime) {
 		this.modifiedTime = modifiedTime;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 }

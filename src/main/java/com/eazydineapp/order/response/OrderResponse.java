@@ -1,12 +1,13 @@
 package com.eazydineapp.order.response;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.eazydineapp.order.model.OrderLineItem;
 import com.eazydineapp.order.model.OrderStatus;
 import com.eazydineapp.order.model.OrderType;
 
-public class OrderResponse extends GenericResponse {
+public class OrderResponse  implements Serializable {
 
 	private static final long serialVersionUID = 5312528063870975426L;
 	private String orderId;
